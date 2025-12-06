@@ -1,0 +1,7 @@
+{
+  "name": "mobilVize",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
