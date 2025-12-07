@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="Geri"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ürün Detayı</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" *ngIf="urunDetay">
+
+  <div class="image-container" style="text-align: center; margin-bottom: 20px;">
+    <img [src]="urunDetay.thumbnail" style="height: 250px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  </div>
+
+  <ion-label>
+    <h1 style="font-weight: bold; color: #333;">{{ urunDetay.title }}</h1>
+    <h3 style="color: #666;">{{ urunDetay.brand }} - {{ urunDetay.category }}</h3>
+  </ion-label>
+
+  <ion-item lines="none" style="margin-top: 10px;">
+    <ion-badge slot="start" color="warning">{{ urunDetay.rating }} Yıldız</ion-badge>
+    <ion-badge slot="end" color="success">Stok: {{ urunDetay.stock }}</ion-badge>
+  </ion-item>
+
+  <p style="font-size: 1.1rem; line-height: 1.5; color: #444;">
+    {{ urunDetay.description }}
+  </p>
+
+  <h1 style="color: #2dd36f; font-weight: bold; text-align: right;">
+    ${{ urunDetay.price }}
+  </h1>
+
+  <ion-button expand="block" color="primary" size="large" style="margin-top: 20px;" (click)="sepeteEkle()">
+  Sepete Ekle
+</ion-button>
+
+</ion-content>

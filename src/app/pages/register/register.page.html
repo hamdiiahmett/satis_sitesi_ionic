@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login" text="Geri"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Kayıt Ol</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <div style="padding-top: 20px; padding-bottom: 20px;">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center" color="primary">Yeni Hesap</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form [formGroup]="kayitFormu" (ngSubmit)="kayitOl()">
+
+          <ion-item lines="full">
+            <ion-label position="stacked">Ad</ion-label>
+            <ion-input formControlName="firstName" type="text" placeholder="Adınız"></ion-input>
+          </ion-item>
+          <ion-note slot="error" color="danger" *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)">
+            <span *ngIf="firstName?.errors?.['required']">Ad gereklidir.</span>
+            <span *ngIf="firstName?.errors?.['minlength']">En az 3 karakter olmalı.</span>
+          </ion-note>
+
+          <ion-item lines="full" class="ion-margin-top">
+            <ion-label position="stacked">Soyad</ion-label>
+            <ion-input formControlName="lastName" type="text" placeholder="Soyadınız"></ion-input>
+          </ion-item>
+          <ion-note slot="error" color="danger" *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">
+            <span *ngIf="lastName?.errors?.['required']">Soyad gereklidir.</span>
+            <span *ngIf="lastName?.errors?.['minlength']">En az 3 karakter olmalı.</span>
+          </ion-note>
+
+          <ion-item lines="full" class="ion-margin-top">
+            <ion-label position="stacked">Kullanıcı Adı</ion-label>
+            <ion-input formControlName="username" type="text" placeholder="kullaniciadi"></ion-input>
+          </ion-item>
+
+          <ion-item lines="full" class="ion-margin-top">
+            <ion-label position="stacked">E-posta</ion-label>
+            <ion-input formControlName="email" type="email" placeholder="ornek@email.com"></ion-input>
+          </ion-item>
+          <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" style="padding-left: 16px; margin-top: 5px;">
+            <ion-text color="danger" *ngIf="email?.errors?.['email']">
+              <small>Geçerli bir e-posta adresi giriniz.</small>
+            </ion-text>
+          </div>
+
+          <ion-item lines="full" class="ion-margin-top">
+            <ion-label position="stacked">Şifre</ion-label>
+            <ion-input formControlName="password" type="password" placeholder="******"></ion-input>
+          </ion-item>
+          <div *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+            style="padding-left: 16px; margin-top: 5px;">
+            <ion-text color="danger" *ngIf="password?.errors?.['required']">
+              <small>Şifre gereklidir.</small>
+            </ion-text>
+            <ion-text color="danger" *ngIf="password?.errors?.['pattern']">
+              <small>Şifre en az 6 karakter, 1 büyük harf, 1 küçük harf ve 1 rakam içermelidir.</small>
+            </ion-text>
+          </div>
+
+          <ion-button expand="block" type="submit" class="ion-margin-top">
+            Kayıt Ol
+          </ion-button>
+
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

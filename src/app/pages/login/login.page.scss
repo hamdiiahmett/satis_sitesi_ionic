@@ -1,0 +1,11 @@
+ion-content {
+  --background: url('/assets/bg/login_new.png') no-repeat center center / cover;
+}
+
+ion-card {
+  --background: rgba(255, 255, 255, 0.9);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}

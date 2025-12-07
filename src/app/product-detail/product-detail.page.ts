@@ -1,66 +1,33 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Authentication } from '../authentication';
-
-
-
 import { ToastController, AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
-
 import { Preferences } from '@capacitor/preferences';
 
-
-
 @Component({
-
-  selector: 'app-home',
-
-  templateUrl: 'home.page.html',
-
-  styleUrls: ['home.page.scss'],
-
+  selector: 'app-product-detail',
+  templateUrl: './product-detail.page.html',
+  styleUrls: ['./product-detail.page.scss'],
   standalone: false,
-
 })
+export class ProductDetailPage implements OnInit {
 
-export class HomePage implements OnInit {
-
-
-
-  urunListesi: any[] = [];
-  isLoggedIn: boolean = false;
-
-
+  urunDetay: any;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
+    private authService: Authentication,
     private toastController: ToastController,
     private alertController: AlertController,
-    private router: Router,
-    private authService: Authentication
+    private router: Router
   ) { }
 
-
-
   ngOnInit() {
-    this.urunleriCek();
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.authService.getProduct(id).subscribe((res) => {
+      this.urunDetay = res;
+    });
   }
-
-  async ionViewWillEnter() {
-    const { value: token } = await Preferences.get({ key: 'ionicAuth_usertoken' });
-    this.isLoggedIn = !!token;
-  }
-
-
-
-  urunleriCek() {
-    this.authService.getAllProducts().subscribe(
-      (res: any) => {
-        this.urunListesi = res.products;
-        console.log("Ürünler Geldi:", this.urunListesi);
-      }
-    );
-  }
-
-
 
   async checkAuth(): Promise<boolean> {
     const { value: token } = await Preferences.get({ key: 'ionicAuth_usertoken' });
@@ -80,50 +47,27 @@ export class HomePage implements OnInit {
     return true;
   }
 
-  async openCart() {
-    this.router.navigate(['/sepet']);
-  }
-
-  goToLogin() {
-    this.router.navigate(['/login']);
-  }
-
-  async logout() {
-    await this.authService.tokenSil();
-    this.isLoggedIn = false;
-    const toast = await this.toastController.create({
-      message: 'Başarıyla çıkış yapıldı.',
-      duration: 1500,
-      color: 'dark',
-      position: 'bottom'
-    });
-    await toast.present();
-  }
-
-  async sepeteAt(urun: any) {
+  async sepeteEkle() {
     if (!(await this.checkAuth())) return;
 
     const { value } = await Preferences.get({ key: 'sepetim' });
     let sepet = value ? JSON.parse(value) : [];
 
-    const itemToAdd = { ...urun, isLocal: true };
+    const itemToAdd = { ...this.urunDetay, isLocal: true };
     sepet.push(itemToAdd);
-
-    console.log("Sepete eklenen ürün:", itemToAdd);
-    console.log("Güncel Sepet (Yerel):", sepet);
 
     await Preferences.set({
       key: 'sepetim',
       value: JSON.stringify(sepet)
     });
 
+    console.log("Sepete eklendi:", itemToAdd);
     const toast = await this.toastController.create({
-      message: urun.title + ' sepete eklendi!',
+      message: 'Ürün sepete eklendi!',
       duration: 1500,
-      color: 'success',
-      position: 'bottom'
+      position: 'bottom',
+      color: 'success'
     });
     await toast.present();
   }
-
 }

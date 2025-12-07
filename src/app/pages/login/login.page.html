@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Giriş Yap</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  <form [formGroup]="uyelikBilgisi" (ngSubmit)="girisYap()">
+    
+    <ion-card>
+      <ion-card-content>
+        
+        <ion-item>
+          <ion-input label="Kullanıcı Adı" labelPlacement="floating" type="text" formControlName="username"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input label="Şifre" labelPlacement="floating" type="password" formControlName="password"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" type="submit" [disabled]="!uyelikBilgisi.valid" class="ion-margin-top">
+          Giriş Yap
+        </ion-button>
+
+        <ion-button expand="block" fill="clear" routerLink="/register" color="secondary">
+          Kayıt Ol
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+
+  </form>
+
+</ion-content>
