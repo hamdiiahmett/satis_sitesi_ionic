@@ -37,7 +37,7 @@
           </ion-note>
 
           <ion-item lines="full" class="ion-margin-top">
-            <ion-label position="stacked">Kullanıcı Adı</ion-label>
+            <ion-label position="stacked">Kullanıci Adı</ion-label>
             <ion-input formControlName="username" type="text" placeholder="kullaniciadi"></ion-input>
           </ion-item>
 
@@ -47,7 +47,7 @@
           </ion-item>
           <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" style="padding-left: 16px; margin-top: 5px;">
             <ion-text color="danger" *ngIf="email?.errors?.['email']">
-              <small>Geçerli bir e-posta adresi giriniz.</small>
+              <small>Gecerli bir e-posta adresi giriniz.</small>
             </ion-text>
           </div>
 
@@ -58,7 +58,7 @@
           <div *ngIf="password?.invalid && (password?.dirty || password?.touched)"
             style="padding-left: 16px; margin-top: 5px;">
             <ion-text color="danger" *ngIf="password?.errors?.['required']">
-              <small>Şifre gereklidir.</small>
+              <small>Sifre gereklidir.</small>
             </ion-text>
             <ion-text color="danger" *ngIf="password?.errors?.['pattern']">
               <small>Şifre en az 6 karakter, 1 büyük harf, 1 küçük harf ve 1 rakam içermelidir.</small>

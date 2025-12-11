@@ -66,7 +66,7 @@ export class ProductDetailPage implements OnInit {
       message: 'Ürün sepete eklendi!',
       duration: 1500,
       position: 'bottom',
-      color: 'success'
+      color: '#427425ff'
     });
     await toast.present();
   }

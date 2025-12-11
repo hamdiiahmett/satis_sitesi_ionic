@@ -14,23 +14,14 @@
         <ion-icon name="trash-bin-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-
   </ion-toolbar>
-
 </ion-header>
-
-
-
 <ion-content [fullscreen]="true" class="ion-padding">
-
-
-
   <div *ngIf="sepetUrunleri.length === 0" class="ion-text-center" style="margin-top: 50px;">
 
     <h3>Sepetiniz şu an boş.Doldurmak icin guzel urunlerimiz mevcut.</h3>
 
     <ion-button routerLink="/home" fill="outline">Alışverişe Başla</ion-button>
-
   </div>
 
 
@@ -63,46 +54,29 @@
         </div>
       </ion-item>
 
-      <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="sil(urun)">
-          <ion-icon name="trash" slot="top"></ion-icon>
+ <ion-item-options side="end">
+<ion-item-option color="danger" (click)="sil(urun)">
+   <ion-icon name="trash" slot="top"></ion-icon>
           Sil
-        </ion-item-option>
-      </ion-item-options>
-
+  </ion-item-option>
+</ion-item-options>
     </ion-item-sliding>
   </ion-list>
-
-
-
 </ion-content>
 
 
-
 <ion-footer *ngIf="sepetUrunleri.length > 0">
-
   <ion-toolbar color="light">
-
     <div style="padding: 10px; display: flex; justify-content: space-between; align-items: center;">
-
       <div>
-
         <h4 style="margin: 0;">Toplam ({{ toplamAdet }} ürün)</h4>
-
         <h2 style="margin: 0; color: var(--ion-color-primary); font-weight: bold;">
-
           ${{ toplamTutar }}
-
         </h2>
-
       </div>
-
       <ion-button color="success" (click)="satinAl()">
         Satın Al
       </ion-button>
-
     </div>
-
   </ion-toolbar>
-
 </ion-footer>
