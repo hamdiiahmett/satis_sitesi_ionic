@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Authentication } from '../../authentication';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -12,16 +12,15 @@ import { AlertController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  kullaniciVerisi: any;
   uyelikBilgisi!: FormGroup;
-
-  gucluSifreKurali: RegExp = /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{6,}$/;
+  showPassword: boolean = false;
 
   constructor(
     private router: Router,
     private authServis: Authentication,
     private formBuilder: FormBuilder,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -31,22 +30,32 @@ export class LoginPage implements OnInit {
     });
   }
 
-  get username() { return this.uyelikBilgisi.get('username') as FormControl; }
-  get password() { return this.uyelikBilgisi.get('password') as FormControl; }
+  get username() { return this.uyelikBilgisi.get('username'); }
+  get password() { return this.uyelikBilgisi.get('password'); }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
 
   girisYap() {
     if (this.uyelikBilgisi.valid) {
       this.authServis.login(this.uyelikBilgisi.value).subscribe(
-        (cevap: any) => {
-          this.kullaniciVerisi = cevap;
-          console.log("Giriş Başarılı:", this.kullaniciVerisi);
+        async (cevap: any) => {
+          this.authServis.tokenKaydet(cevap.token, cevap.id);
 
-          this.authServis.tokenKaydet(this.kullaniciVerisi.token, this.kullaniciVerisi.id);
+          const toast = await this.toastController.create({
+            message: 'Giriş başarılı! Yönlendiriliyorsunuz...',
+            duration: 1000, 
+            color: 'success',
+            position: 'top',
+            icon: 'checkmark-circle'
+          });
+          await toast.present();
 
+          await toast.onDidDismiss();
           this.router.navigateByUrl('/home');
         },
         async (hata) => {
-          console.log(hata);
           const alert = await this.alertController.create({
             header: 'Hata',
             message: 'Kullanıcı adı veya şifre hatalı!',
@@ -55,6 +64,8 @@ export class LoginPage implements OnInit {
           await alert.present();
         }
       )
+    } else {
+      this.uyelikBilgisi.markAllAsTouched();
     }
   }
 }

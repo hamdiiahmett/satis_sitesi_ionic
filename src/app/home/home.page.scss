@@ -1,23 +1,234 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.bg-light {
+  --background: #f8f9fa; 
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.home-toolbar {
+  --background: linear-gradient(135deg, #800000 0%, #b71c1c 100%);
+  --color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  box-shadow: 0 4px 15px rgba(128, 0, 0, 0.3); 
+
+  .welcome-box {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    
+    .sparkle-icon {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
+      
+      ion-icon { color: #FFD700; font-size: 18px; } 
+    }
+
+    .text-content {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+
+      .hello { font-size: 0.7rem; font-weight: 700; opacity: 0.9; }
+      .sub-text { font-size: 0.8rem; font-weight: 600; color: #fff; }
+    }
+  }
+
+  .main-title {
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .action-btn {
+    --color: white;
+    font-size: 1.1rem;
+  }
 }
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  color: #8c8c8c;
-  margin: 0;
+
+.product-grid {
+  padding: 10px;
 }
-#container a {
-  text-decoration: none;
+
+.product-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  margin-bottom: 15px;
+  transition: transform 0.2s;
+  
+
+  opacity: 0;
+  animation: slideUp 0.6s ease forwards;
+  
+  animation-delay: calc(var(--i) * 0.1s); 
+
+  &:active {
+    transform: scale(0.98); 
+  }
+
+  .image-container {
+    position: relative;
+    height: 160px;
+    background: #f4f4f4;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .category-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .fav-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: white;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+
+      ion-icon {
+        font-size: 18px;
+        color: #ccc;
+        transition: color 0.3s;
+        
+        &.active { color: #e91e63; } 
+      }
+    }
+  }
+
+  .info-container {
+    padding: 12px;
+
+    .product-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #333;
+      margin: 0 0 5px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .product-desc {
+      font-size: 0.75rem;
+      color: #888;
+      margin: 0 0 10px 0;
+      line-height: 1.3;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .price {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #800000; 
+      }
+
+      // Sepete Ekle Butonu (+)
+      .add-btn {
+        background: #800000;
+        color: white;
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(128, 0, 0, 0.3);
+
+        &:active { background: #5c0000; }
+      }
+    }
+  }
+}
+
+.floating-promo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px; 
+  z-index: 999;
+  
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  
+  background: rgba(128, 0, 0, 0.85); 
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 10px 30px rgba(128, 0, 0, 0.4);
+
+  animation: float 3s ease-in-out infinite;
+
+  .promo-icon {
+    background: white;
+    color: #800000;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-size: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+  .promo-text {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+
+    strong { font-size: 0.9rem; }
+    span { font-size: 0.75rem; opacity: 0.9; }
+  }
+}
+
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
 }

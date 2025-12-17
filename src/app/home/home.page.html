@@ -1,89 +1,87 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+<ion-header class="ion-no-border">
+  <ion-toolbar class="home-toolbar">
     
-    <div slot="start" style="display: flex; align-items: center; margin-left: 10px;">
-      <ion-icon name="sparkles-outline" style="font-size: 20px; margin-right: 5px; color: #dfdfdf;"></ion-icon>
-      <div style="   color: white;">
-        HOŞGELDİN!<br>
+    <div slot="start" class="welcome-box">
+      <div class="sparkle-icon">
+        <ion-icon name="sparkles"></ion-icon>
+      </div>
+      <div class="text-content">
+        <span class="hello">HOŞGELDİN</span>
+        <span class="sub-text">Fırsatları Keşfet!</span>
       </div>
     </div>
 
-    <ion-title style="text-align: center;">
-      ÜRÜNLER
-    </ion-title>
+    <ion-title class="main-title">MAĞAZA</ion-title>
 
     <ion-buttons slot="end">
-      <ion-button (click)="openCart()">
-        <ion-icon slot="icon-only" name="cart"></ion-icon>
+      <ion-button class="action-btn" (click)="openCart()">
+        <ion-icon name="bag-handle-outline"></ion-icon>
       </ion-button>
 
-      <ion-button *ngIf="!isLoggedIn" (click)="goToLogin()">
-        <ion-icon slot="icon-only" name="log-in-outline"></ion-icon>
+      <ion-button class="action-btn" *ngIf="!isLoggedIn" (click)="goToLogin()">
+        <ion-icon name="person-circle-outline"></ion-icon>
       </ion-button>
 
-      <ion-button *ngIf="isLoggedIn" (click)="logout()">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      <ion-button class="action-btn" *ngIf="isLoggedIn" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  
+<ion-content [fullscreen]="true" class="bg-light">
+
   <ion-refresher slot="fixed" (ionRefresh)="yenile($event)">
-    <ion-refresher-content pullingText="Yenilemek için çekin..." refreshingSpinner="circles"></ion-refresher-content>
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Yenile..." refreshingSpinner="crescent"></ion-refresher-content>
   </ion-refresher>
 
-  <ion-grid>
+  <ion-grid class="product-grid">
     <ion-row>
-      <ion-col size="6" size-md="4" *ngFor="let p of urunListesi">
+      
+      <ion-col size="6" size-md="4" size-lg="3" *ngFor="let p of urunListesi; let i = index">
 
-        <ion-card>
+        <div class="product-card" [style.--i]="i">
           
-          <div style="position: relative;">
+          <div class="image-container">
+            <span class="category-badge">{{ p.category }}</span>
             
-            <ion-button 
-              fill="clear" 
-              (click)="favorile(p)" 
-              style="position: absolute; top: 0; right: 0; z-index: 10;">
-              <ion-icon 
-                [name]="p.isFavorite ? 'heart' : 'heart-outline'" 
-                [color]="p.isFavorite ? 'danger' : 'medium'"
-                style="font-size: 24px; filter: drop-shadow(0 2px 2px rgba(255,255,255,0.8));">
-              </ion-icon>
-            </ion-button>
+            <button class="fav-btn" (click)="favorile(p)">
+              <ion-icon [name]="p.isFavorite ? 'heart' : 'heart-outline'" 
+                        [class.active]="p.isFavorite"></ion-icon>
+            </button>
 
-                 <ion-img [src]="p.thumbnail" [routerLink]="['/product-detail', p.id]"
-              style="height: 150px; object-fit: cover;"></ion-img>
+            <img [src]="p.thumbnail" [routerLink]="['/product-detail', p.id]" />
           </div>
-          <ion-card-header>
-            <ion-card-subtitle>{{ p.category }}</ion-card-subtitle>
-            <ion-card-title style="font-size: 1rem;">{{ p.title }}</ion-card-title>
-          </ion-card-header>
 
-          <ion-card-content>
-            <h2 style="color: var(--ion-color-primary); font-weight: bold;">
-              ${{ p.price }}
-            </h2>
-            <p style="font-size: 0.8rem; color: #666;">
-              {{ p.description.substring(0, 50) }}...
-            </p>
-            <ion-button expand="block" size="small" class="ion-margin-top" (click)="sepeteAt(p)">
-              Sepete Ekle
-            </ion-button>
-          </ion-card-content>
-            </ion-card>
+          <div class="info-container">
+            <h3 class="product-title">{{ p.title }}</h3>
+            
+            <p class="product-desc">{{ p.description.substring(0, 35) }}...</p>
+
+            <div class="price-row">
+              <span class="price">${{ p.price }}</span>
+              
+              <button class="add-btn" (click)="sepeteAt(p)">
+  <ion-icon name="add"></ion-icon>
+</button>
+            </div>
+          </div>
+
+        </div>
 
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-button 
-    color="tertiary" 
-    style="position: fixed; bottom: 20px; right: 20px; z-index: 999;  height: auto; ">
-    <ion-icon slot="start" name="megaphone-outline" style="font-size: 24px;"></ion-icon>
-    <div>
-      <span>10 Aralık'ta DEV İNDİRİM!! %50</span><br>
-      <span>KAÇIRAN ÇOK ŞEY KAYBEDER!!!</span>
+
+  <div class="floating-promo">
+    <div class="promo-icon">
+      <ion-icon name="megaphone"></ion-icon>
     </div>
-  </ion-button>
+    <div class="promo-text">
+      <strong>DEV İNDİRİM!</strong>
+      <span>10 Aralık'ta %50 Fırsatı</span>
+    </div>
+  </div>
+
 </ion-content>

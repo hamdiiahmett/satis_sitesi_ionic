@@ -1,32 +1,59 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Giriş Yap</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: transparent;">
+    <ion-title style="color: white; font-weight: 600; text-align: center;">Giriş Yap</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content [fullscreen]="true">
   
-  <form [formGroup]="uyelikBilgisi" (ngSubmit)="girisYap()">
-    
-    <ion-card>
-      <ion-card-content>
-        
-        <ion-item>
-          <ion-input label="Kullanıcı Adı" labelPlacement="floating" type="text" formControlName="username"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input label="Şifre" labelPlacement="floating" type="password" formControlName="password"></ion-input>
-        </ion-item>
+  <div class="main-container">
 
-        <ion-button expand="block" type="submit" [disabled]="!uyelikBilgisi.valid" class="ion-margin-top">
-          Giriş Yap
+    <div class="header-section">
+      <div class="icon-circle">
+        <ion-icon name="log-in"></ion-icon>
+      </div>
+      <h2>Tekrar Hoş Geldin!</h2>
+      <p>Devam etmek için giriş yap.</p>
+    </div>
+
+    <div class="glass-card">
+      <form [formGroup]="uyelikBilgisi" (ngSubmit)="girisYap()">
+
+        <ion-item lines="none" class="custom-item">
+          <ion-icon name="person-outline" slot="start" class="input-icon"></ion-icon>
+          <ion-input formControlName="username" type="text" placeholder="Kullanıcı Adı"></ion-input>
+        </ion-item>
+        <div class="error-msg" *ngIf="username?.invalid && (username?.dirty || username?.touched)">
+          <small *ngIf="username?.errors?.['required']">Kullanıcı adı gereklidir.</small>
+        </div>
+
+        <ion-item lines="none" class="custom-item">
+          <ion-icon name="lock-closed-outline" slot="start" class="input-icon"></ion-icon>
+          
+          <ion-input formControlName="password" [type]="showPassword ? 'text' : 'password'" placeholder="Şifre"></ion-input>
+          
+          <ion-icon 
+            [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" 
+            slot="end" 
+            (click)="togglePassword()"
+            class="password-toggle-icon">
+          </ion-icon>
+        </ion-item>
+        <div class="error-msg" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+          <small *ngIf="password?.errors?.['required']">Şifre gereklidir.</small>
+        </div>
+
+        <ion-button expand="block" type="submit" class="submit-btn">
+          GİRİŞ YAP
         </ion-button>
 
-        <ion-button expand="block" fill="clear" routerLink="/register" color="secondary">
-          Kayıt Ol
-        </ion-button>
+      </form>
 
-      </ion-card-content>
-    </ion-card>
-  </form>
+      <div class="footer-link">
+        <p>Hesabın yok mu? <a routerLink="/register">Kayıt Ol</a></p>
+      </div>
+
+    </div>
+  </div>
+
 </ion-content>

@@ -13,8 +13,9 @@ import { AlertController } from '@ionic/angular';
 export class RegisterPage implements OnInit {
 
   kayitFormu!: FormGroup;
-
   strongPasswordRegex: RegExp = /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{6,}$/;
+  
+  showPassword: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,8 +28,8 @@ export class RegisterPage implements OnInit {
     this.kayitFormu = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
       username: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern(this.strongPasswordRegex)]]
     });
   }
@@ -38,6 +39,10 @@ export class RegisterPage implements OnInit {
   get firstName() { return this.kayitFormu.get('firstName'); }
   get lastName() { return this.kayitFormu.get('lastName'); }
   get username() { return this.kayitFormu.get('username'); }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
 
   kayitOl() {
     if (this.kayitFormu.valid) {
