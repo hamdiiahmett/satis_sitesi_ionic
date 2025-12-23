@@ -1,43 +1,74 @@
-# 🛒 Ionic E-Ticaret Uygulaması 
+# 🛒 Ionic Modern E-Ticaret Uygulaması
 
-Bu proje, Mobil Programlama dersi vize gereksinimlerini karşılamak üzere Ionic Framework (Angular) kullanılarak geliştirilmiştir.
+Bu proje, Mobil Programlama dersi vize gereksinimlerini karşılamak ve modern mobil UI trendlerini (Glassmorphism, Animasyonlar) uygulamak amacıyla **Ionic Framework (Angular)** kullanılarak geliştirilmiştir.
 
-## ✨ Kullanılan Teknolojiler
+Uygulama, kullanıcı dostu arayüzü, akıcı geçişleri ve gerçek zamanlı API bağlantıları ile tam kapsamlı bir e-ticaret deneyimi sunar.
+
+---
+
+## 📱 Ekran Görüntüleri
+
+Projenin modern tasarımından kareler:
+
+| Giriş Yap (Login) | Kayıt Ol (Register) | Ana Sayfa (Home) | Sepetim (Cart) |
+| :---: | :---: | :---: | :---: |
+| <img src="screenshots/login.png" width="200"> | <img src="screenshots/register.png" width="200"> | <img src="screenshots/home.png" width="200"> | <img src="screenshots/cart.png" width="200"> |
+
+---
+
+## ✨ Öne Çıkan Özellikler
+
+Bu proje standart gereksinimlerin ötesine geçerek şu özellikleri barındırır:
+
+* **🎨 Modern UI/UX:**
+    * **Glassmorphism Tasarım:** Login ve Register sayfalarında buzlu cam efektleri.
+    * **Skeleton Loading:** Veriler yüklenirken kullanıcıya gri iskelet ekran gösterimi.
+    * **Staggered Animations:** Ürünlerin ve liste elemanlarının sırayla, kayarak ekrana gelmesi.
+    * **Haptic Feedback:** Sepete ekleme ve favorileme işlemlerinde titreşim geri bildirimi.
+* **🔐 Güvenlik & Doğrulama:**
+    * Reactive Forms ile anlık form validasyonu (Email kontrolü, güçlü şifre regex'i).
+    * Şifre Göster/Gizle özelliği.
+    * Token bazlı oturum yönetimi (`@capacitor/preferences` ile).
+* **🛒 Sepet Yönetimi:**
+    * Yerel (Local) ve API tabanlı sepet birleştirme mantığı.
+    * Dinamik toplam tutar hesaplama.
+    * Ürün silme animasyonları.
+
+## 🛠️ Kullanılan Teknolojiler
 
 * **Framework:** Angular 14+
 * **Mobil Çatı:** Ionic Framework 6
-* **API:** DummyJSON REST API (https://dummyjson.com/)
-* **Yerel Depolama:** @capacitor/preferences
+* **Dil:** TypeScript & SCSS
+* **API:** [DummyJSON](https://dummyjson.com/) (Ürün ve Auth işlemleri için)
+* **Veri Saklama:** Capacitor Preferences (Local Storage)
 
-## 🔑 Ana Özellikler ve Endpoint'ler
+## 🔑 Endpoint Kullanımı
 
-Proje, DummyJSON API'sinde belirtilen endpoint'leri kullanarak aşağıdaki işlevleri sunmaktadır:
+Proje, DummyJSON API'si üzerinde aşağıdaki servisleri kullanır:
 
-1.  **Giriş Yapma (Login):** Kullanıcı adı ve şifre ile token alma işlemi.
-    * *Endpoint:* `/auth/login`
-2.  **Kayıt Olma (Register):** DummyJSON `users/add` servisi ile kayıt simülasyonu.
-3.  **Ürün Listeleme (Home):** Tüm ürünlerin listelenmesi ve detay sayfasına yönlendirme.
-    * *Endpoint:* `/products`
-4.  **Ürün Detay:** Ürün ID'sine göre tek bir ürünün detayını gösterme.
-5.  **Sepet Görüntüleme:** Kullanıcı ID'sine göre atanan sepetin API'den çekilmesi.
-    * *Endpoint:* `/carts/user/1` (Vize için sabit ID)
+1.  **Auth:** `/auth/login` (Token alma)
+2.  **Kayıt:** `/users/add` (Simülasyon)
+3.  **Ürünler:** `/products` (Tüm ürünleri çekme)
+4.  **Sepet:** `/carts/user/1` (Kullanıcıya özel sepeti getirme)
 
-## 🛠️ Kurulum ve Çalıştırma
+---
 
-Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin:
+## 🚀 Kurulum ve Çalıştırma
 
-1.  Projeyi klonlayın:
+Projeyi kendi bilgisayarınızda çalıştırmak için:
+
+1.  **Projeyi Klonlayın:**
     ```bash
     git clone [https://github.com/KULLANICI_ADINIZ/REPO_ADINIZ.git](https://github.com/KULLANICI_ADINIZ/REPO_ADINIZ.git)
+    cd mobilVize
     ```
 
-2.  Proje dizinine gidin ve bağımlılıkları yükleyin:
+2.  **Bağımlılıkları Yükleyin:**
     ```bash
-    cd REPO_ADINIZ
     npm install
     ```
 
-3.  Uygulamayı tarayıcıda başlatın:
+3.  **Uygulamayı Başlatın:**
     ```bash
     ionic serve
     ```
