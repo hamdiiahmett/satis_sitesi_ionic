@@ -12,7 +12,7 @@ Projenin modern tasarımından kareler:
 
 | Giriş Yap (Login) | Kayıt Ol (Register) | Ana Sayfa (Home) | Sepetim (Cart) |
 | :---: | :---: | :---: | :---: |
-| <img src="screenshots/login.png" width="200"> | <img src="screenshots/register.png" width="200"> | <img src="screenshots/home.png" width="200"> | <img src="screenshots/cart.png" width="200"> |
+| <img src="screenshots/login.png.png" width="200"> | <img src="screenshots/register.png.png" width="200"> | <img src="screenshots/home.png.png" width="200"> | <img src="screenshots/cart.png.png" width="200"> |
 
 ---
 
