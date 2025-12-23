@@ -59,8 +59,8 @@ Projeyi kendi bilgisayarınızda çalıştırmak için:
 
 1.  **Projeyi Klonlayın:**
     ```bash
-    git clone [https://github.com/KULLANICI_ADINIZ/REPO_ADINIZ.git](https://github.com/KULLANICI_ADINIZ/REPO_ADINIZ.git)
-    cd mobilVize
+    git clone [https://github.com/hamdiiahmett/satis_sitesi_ionic.git](https://github.com/hamdiiahmett/satis_sitesi_ionic.git)
+    cd satis_sitesi_ionic
     ```
 
 2.  **Bağımlılıkları Yükleyin:**
